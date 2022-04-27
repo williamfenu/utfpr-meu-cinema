@@ -1,7 +1,10 @@
 <h1>Meu cinema</h1>
+
+Link do protótipo: https://www.figma.com/file/MIx1tFTl0rvgkKH4nmTg5W/Meu-cinema?node-id=0%3A1
+
 <h3>Checklist</h3>
 
-- [ ] Criar o repositório no GitHub com a estrutura do Gitflow, ou seja, branches main e develop.
+- [x] Criar o repositório no GitHub com a estrutura do Gitflow, ou seja, branches main e develop.
 - [ ] Usar componentes de algum framework CSS (Bootstrap, Materialize ou outro).
 - [ ] Apresentar as telas com layout responsivo usando ou não algum framework CSS.
 - [ ] Construir páginas web com o conceito de componentes. 
