@@ -1,0 +1,20 @@
+@keyframes animation {
+  from {color: var(--red);}
+  to {color: var(--yellow);}
+}
+
+.banner {
+  border: 0.2em dotted var(--red);
+  padding: 5em;
+  text-align: center;
+}
+
+.info {
+  font-weight: bold;
+  color: var(--red);
+  animation-name: animation;
+  animation-duration: 2s;
+  animation-direction: alternate-reverse;
+  animation-iteration-count: infinite;
+}
+
