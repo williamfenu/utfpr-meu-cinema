@@ -1,3 +1,25 @@
-<header class="header">
-  <h1 class="logo">Meu cinema</h1>
-</header>
+<nav class="gradient nav-extended">
+  <div class="nav-wrapper">
+    <a href="#" class="brand-logo logo"><img src="{{ this.logoPath }}" /></a>
+  </div>
+  <div class="nav-content">
+    <ul class="center tabs tabs-transparent">
+      <li class="tab">
+        <a
+          (click)="changeActive($event)"
+          class="{{ this.menus.main.active ? 'active underline' : '' }}"
+          href="#test1"
+          >{{ this.menus.main.label }}</a
+        >
+      </li>
+      <li class="tab">
+        <a
+          (click)="changeActive($event)"
+          class="{{ this.menus.myLibray.active ? 'active underline' : '' }}"
+          href="#test2"
+          >{{ this.menus.myLibray.label }}</a
+        >
+      </li>
+    </ul>
+  </div>
+</nav>
