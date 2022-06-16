@@ -1,0 +1,29 @@
+<div>
+  <h2 class="meus-filmes-titulo">Meus filmes</h2>
+  <img class="icon" src="{{ iconPath }}" />
+</div>
+<hr />
+<div class="row">
+  <div *ngFor="let movie of movies" class="col s12 m2">
+    <div class="card small">
+      <div class="card-image waves-effect waves-block waves-light">
+        <img class="activator" src="{{ movie.coverPath }}" />
+      </div>
+      <div class="card-content footer">
+        <span
+          class="card-title activator grey-text text-darken-4"
+          title="{{ movie.name }}"
+        >
+          {{ movie.name }}
+        </span>
+      </div>
+      <div class="card-reveal">
+        <span class="card-title grey-text text-darken-4"
+          >Card Title<i class="material-icons right">close</i></span
+        >
+        <p>{{ movie.description }}</p>
+      </div>
+    </div>
+  </div>
+</div>
+<a (click)="mostrarSpan()" class="waves-effect waves-light btn">Usar @Output</a>

@@ -1,6 +1,5 @@
 import { Component, OnInit } from '@angular/core';
 import { menu } from '../models/menu';
-
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -8,6 +7,7 @@ import { menu } from '../models/menu';
 })
 export class HeaderComponent implements OnInit {
   logoPath = '/assets/logo.png';
+  labelButton = 'Cadastrar novo Filme';
   menus: {
     main: menu;
     myLibray: menu;
@@ -22,16 +22,20 @@ export class HeaderComponent implements OnInit {
 
   ngOnInit(): void {}
 
-  changeActive = (event: Event) => {
+  onChangeActiveMenu = (event: Event): void => {
     const htmlAnchorElement = event.target as HTMLAnchorElement;
+    this.changeActiveMenu(htmlAnchorElement.text);
+  };
+
+  changeActiveMenu(menuText: string): void {
     const menu = Object.values(this.menus).find(
-      (menu) => menu.label === htmlAnchorElement.text
+      (menu) => menu.label === menuText
     );
     if (menu) {
       menu.active = true;
       Object.values(this.menus)
-        .filter((menu) => menu.label !== htmlAnchorElement.text)
+        .filter((menu) => menu.label !== menuText)
         .forEach((menu) => (menu.active = false));
     }
-  };
+  }
 }

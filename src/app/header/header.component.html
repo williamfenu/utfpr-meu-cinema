@@ -1,25 +1,48 @@
 <nav class="gradient nav-extended">
   <div class="nav-wrapper">
-    <a href="#" class="brand-logo logo"><img src="{{ this.logoPath }}" /></a>
+    <a
+      routerLink="inicio"
+      (click)="changeActiveMenu('Inicio')"
+      class="brand-logo logo"
+    >
+      <img src="{{ logoPath }}"
+    /></a>
+    <a href="#" data-target="mobile-demo" class="sidenav-trigger"
+      ><i class="material-icons">menu</i>
+    </a>
+    <ul id="nav-mobile" class="right hide-on-med-and-down">
+      <li>
+        <app-button
+          class="button-margin"
+          [childrenValue]="labelButton"
+        ></app-button>
+      </li>
+    </ul>
   </div>
   <div class="nav-content">
     <ul class="center tabs tabs-transparent">
       <li class="tab">
         <a
-          (click)="changeActive($event)"
+          (click)="onChangeActiveMenu($event)"
           class="{{ this.menus.main.active ? 'active underline' : '' }}"
-          href="#test1"
+          routerLink="inicio"
           >{{ this.menus.main.label }}</a
         >
       </li>
       <li class="tab">
         <a
-          (click)="changeActive($event)"
+          (click)="onChangeActiveMenu($event)"
           class="{{ this.menus.myLibray.active ? 'active underline' : '' }}"
-          href="#test2"
+          routerLink="biblioteca"
           >{{ this.menus.myLibray.label }}</a
         >
       </li>
     </ul>
   </div>
 </nav>
+
+<ul class="sidenav" id="mobile-demo">
+  <li>
+    <a href="sass.html">{{ labelButton }}</a>
+  </li>
+</ul>

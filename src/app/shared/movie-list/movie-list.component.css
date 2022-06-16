@@ -1,0 +1,16 @@
+.footer {
+  height: 6.0em;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+}
+
+.meus-filmes-titulo {
+  display: inline;
+}
+
+.icon{
+  margin-top: 0.5em;
+}
