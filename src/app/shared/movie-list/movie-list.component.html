@@ -19,9 +19,12 @@
       </div>
       <div class="card-reveal">
         <span class="card-title grey-text text-darken-4"
-          >Card Title<i class="material-icons right">close</i></span
+          >{{ movie.name }}<i class="material-icons right">close</i></span
         >
-        <p>{{ movie.description }}</p>
+        <p>{{ movie.comments }}</p>
+      </div>
+      <div class="card-action">
+        <a [routerLink]="['../filme', movie.id]">Editar</a>
       </div>
     </div>
   </div>

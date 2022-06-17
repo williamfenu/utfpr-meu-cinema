@@ -1,5 +1,7 @@
+.small{
+  height: 25em;
+}
 .footer {
-  height: 6.0em;
   overflow: hidden;
   text-overflow: ellipsis;
   display: -webkit-box;
@@ -14,3 +16,8 @@
 .icon{
   margin-top: 0.5em;
 }
+
+.card-title{
+  font-size: 1em;
+}
+

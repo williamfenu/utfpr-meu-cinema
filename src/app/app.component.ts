@@ -1,4 +1,4 @@
-import { Component, ElementRef, ViewChild } from '@angular/core';
+import { Component } from '@angular/core';
 import * as M from 'materialize-css';
 
 @Component({
@@ -11,6 +11,6 @@ export class AppComponent {
 
   ngAfterViewInit(): void {
     var elems = document.querySelectorAll('.sidenav');
-    var instances = M.Sidenav.init(elems);
+    M.Sidenav.init(elems);
   }
 }

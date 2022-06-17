@@ -2,8 +2,8 @@ import { Component, OnInit } from '@angular/core';
 
 @Component({
   selector: 'app-main',
-  templateUrl: './main.component.html',
-  styleUrls: ['./main.component.css'],
+  templateUrl: './land-page.component.html',
+  styleUrls: ['./land-page.component.css'],
 })
 export class MainComponent implements OnInit {
   mostrarSpan: boolean = false;

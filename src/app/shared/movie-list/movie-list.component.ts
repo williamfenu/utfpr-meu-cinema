@@ -1,5 +1,5 @@
 import { Component, OnInit, Output, EventEmitter } from '@angular/core';
-import { MovieList } from '../../models/movieList';
+import { Movie, movieSamples } from '../../models/movie';
 
 @Component({
   selector: 'app-movie-list',
@@ -10,18 +10,7 @@ export class MovieListComponent implements OnInit {
   iconPath = this.getAssetFromFolder('movie-icon.png');
   tittle = '';
   @Output() mostrarSpanEvent = new EventEmitter<string>();
-  movies: MovieList[] = [
-    {
-      id: 1,
-      coverPath: this.getAssetFromFolder('star-war-a-new-hope-cover.jpg'),
-      name: 'Star Wars - Uma nova esperança',
-    },
-    {
-      id: 2,
-      coverPath: this.getAssetFromFolder('coming-to-america-cover.jpg'),
-      name: 'Um principe em Nova York',
-    },
-  ];
+  movies: Movie[] = movieSamples;
   constructor() {}
 
   ngOnInit(): void {}
