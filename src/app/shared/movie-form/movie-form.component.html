@@ -1,0 +1,106 @@
+<div class="row">
+  <form #form="ngForm" class="col s6">
+    <div class="row">
+      <div class="input-field col s8">
+        <input
+          id="movie_name"
+          name="movie_name"
+          [(ngModel)]="movie.name"
+          #name="ngModel"
+          class="validate"
+          value="{{ movie.name }}"
+          type="text"
+          required
+        />
+        <label for="movie_name" [ngClass]="movie.name ? 'active' : ''">
+          Nome do filme *</label
+        >
+        <div>
+          <span
+            class="required-description red-text"
+            [hidden]="name.untouched || name.valid"
+          >
+            O nome do filme é obrigatório
+          </span>
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <div class="input-field col s12">
+        <textarea
+          id="movie_comments"
+          name="movie_comments"
+          class="materialize-textarea"
+          [(ngModel)]="movie.comments"
+          value="{{ movie.comments }}"
+          [ngClass]="movie.comments ? 'active' : ''"
+        ></textarea>
+        <label for="movie_comments">Comentários</label>
+      </div>
+    </div>
+    <div class="row">
+      <div class="file-field input-field">
+        <div class="btn red">
+          <span>File</span>
+          <input
+            type="file"
+            accept="image/png, image/jpeg"
+            (change)="onUpload($event)"
+          />
+        </div>
+        <div class="file-path-wrapper">
+          <input class="file-path validate" type="text" />
+        </div>
+      </div>
+    </div>
+    <div class="row">
+      <p>
+        <label>
+          <input
+            [(ngModel)]="movie.status"
+            class="with-gap"
+            value="not_watched"
+            name="status"
+            type="radio"
+            checked
+          />
+          <span>Não assistido</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input
+            [(ngModel)]="movie.status"
+            class="with-gap"
+            value="wish_watch"
+            name="status"
+            type="radio"
+          />
+          <span>Desejo Assistir</span>
+        </label>
+      </p>
+      <p>
+        <label>
+          <input
+            [(ngModel)]="movie.status"
+            class="with-gap"
+            value="watched"
+            name="status"
+            type="radio"
+          />
+          <span>Assistido</span>
+        </label>
+      </p>
+    </div>
+    <app-button
+      [disabled]="!form.valid"
+      label="{{ buttonLabel }}"
+      (action)="onValidSubmit()"
+    ></app-button>
+  </form>
+  <div class="col s6 m3">
+    <div>
+      <img class="cover" [src]="imageUrl" />
+    </div>
+  </div>
+</div>

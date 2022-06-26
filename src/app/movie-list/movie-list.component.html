@@ -1,13 +1,10 @@
-<div>
-  <h2 class="meus-filmes-titulo">Meus filmes</h2>
-  <img class="icon" src="{{ iconPath }}" />
-</div>
+<app-list-title label="{{ title }}"></app-list-title>
 <hr />
 <div class="row">
   <div *ngFor="let movie of movies" class="col s12 m2">
     <div class="card small">
       <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="{{ movie.coverPath }}" />
+        <img class="activator" src="{{ movie.cover }}" />
       </div>
       <div class="card-content footer">
         <span
@@ -25,8 +22,8 @@
       </div>
       <div class="card-action">
         <a [routerLink]="['../filme', movie.id]">Editar</a>
+        <!-- <span class="new badge red" data-badge-caption="">Assistido</span> -->
       </div>
     </div>
   </div>
 </div>
-<a (click)="mostrarSpan()" class="waves-effect waves-light btn">Usar @Output</a>

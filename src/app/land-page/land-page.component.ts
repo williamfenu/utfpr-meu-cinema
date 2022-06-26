@@ -1,17 +1,12 @@
 import { Component, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-land-page',
   templateUrl: './land-page.component.html',
   styleUrls: ['./land-page.component.css'],
 })
-export class MainComponent implements OnInit {
-  mostrarSpan: boolean = false;
+export class LandPageComponent implements OnInit {
   constructor() {}
 
   ngOnInit(): void {}
-
-  changeMostrarSpan() {
-    this.mostrarSpan = !this.mostrarSpan;
-  }
 }

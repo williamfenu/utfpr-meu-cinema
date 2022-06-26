@@ -14,7 +14,8 @@
       <li>
         <app-button
           class="button-margin"
-          [childrenValue]="labelButton"
+          (action)="goToNewMovieForm()"
+          [label]="labelButton"
         ></app-button>
       </li>
     </ul>

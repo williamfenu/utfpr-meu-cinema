@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { menu } from '../models/menu';
+import { Router } from '@angular/router';
+import { menu } from '../models/types/menu';
 @Component({
   selector: 'app-header',
   templateUrl: './header.component.html',
@@ -13,7 +14,7 @@ export class HeaderComponent implements OnInit {
     myLibray: menu;
   };
 
-  constructor() {
+  constructor(private route: Router) {
     this.menus = {
       main: { label: 'Inicio', active: true },
       myLibray: { label: 'Minha Biblioteca', active: false },
@@ -21,6 +22,10 @@ export class HeaderComponent implements OnInit {
   }
 
   ngOnInit(): void {}
+
+  goToNewMovieForm = (): void => {
+    this.route.navigate(['filme', 'novo']);
+  };
 
   onChangeActiveMenu = (event: Event): void => {
     const htmlAnchorElement = event.target as HTMLAnchorElement;
