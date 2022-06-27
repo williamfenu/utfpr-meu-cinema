@@ -1,1 +1,4 @@
-<app-movie-form buttonLabel="Salvar"></app-movie-form>
+<app-movie-form
+  buttonLabel="Salvar"
+  (validSubmit)="onValidMovie($event)"
+></app-movie-form>

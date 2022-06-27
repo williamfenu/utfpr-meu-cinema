@@ -1,7 +1,8 @@
+import { SafeUrl } from '@angular/platform-browser';
 export interface Movie {
-  id: number | undefined;
+  id?: number;
   name: string;
   comments?: string;
   status: 'not_watched' | 'wish_watch' | 'watched';
-  cover?: number | string;
+  cover?: SafeUrl;
 }

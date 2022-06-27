@@ -95,12 +95,12 @@
     <app-button
       [disabled]="!form.valid"
       label="{{ buttonLabel }}"
-      (action)="onValidSubmit()"
+      (action)="submitForm()"
     ></app-button>
   </form>
   <div class="col s6 m3">
     <div>
-      <img class="cover" [src]="imageUrl" />
+      <img class="cover" [src]="movie.cover" />
     </div>
   </div>
 </div>

@@ -1,8 +1,9 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Router } from '@angular/router';
-import { Movie } from '../../models/types/movie';
-import { NgxIndexedDBService } from 'ngx-indexed-db';
+import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+
+import { CoverService } from 'src/app/services/cover.service';
+
+import { Movie } from '../../models/types/movie';
 
 @Component({
   selector: 'app-movie-form',
@@ -10,20 +11,20 @@ import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
   styleUrls: ['./movie-form.component.css'],
 })
 export class MovieFormComponent implements OnInit {
+  @Output() validSubmit = new EventEmitter();
   @Input() buttonLabel!: String;
-  imageUrl: SafeUrl | string = '/assets/default-placeholder.png';
   @Input() movie: Movie = {
     id: undefined,
-    cover: undefined,
+    cover: '/assets/default-placeholder.png',
     name: '',
     status: 'not_watched',
     comments: '',
   };
+  coverIdTemp: number | undefined;
 
   constructor(
-    private router: Router,
-    private indexedDBService: NgxIndexedDBService,
-    private domSanitizer: DomSanitizer
+    private domSanitizer: DomSanitizer,
+    private coverService: CoverService
   ) {}
 
   ngOnInit(): void {}
@@ -32,37 +33,51 @@ export class MovieFormComponent implements OnInit {
     const files = (event.target as HTMLInputElement).files;
     if (files) {
       const cover = files[0];
-
-      this.indexedDBService
-        .add('covers', { data: cover })
-        .subscribe((savedCover) => {
-          this.movie.cover = savedCover.id;
-          this.imageUrl = this.domSanitizer.bypassSecurityTrustUrl(
-            URL.createObjectURL(savedCover.data)
-          );
-        });
+      const reader = new FileReader();
+      reader.readAsDataURL(cover);
+      reader.onload = () => {
+        this.coverService
+          .save({
+            data: reader.result?.toString()!,
+            filename: cover.name,
+            mimeType: cover.type,
+          })
+          .then((response) => {
+            if (response) {
+              this.coverIdTemp = response.id;
+              this.movie.cover = this.domSanitizer.bypassSecurityTrustUrl(
+                URL.createObjectURL(
+                  this.dataURLtoFile(response.data, response.filename)
+                )
+              );
+            }
+          });
+      };
     }
   }
 
-  onValidSubmit() {
-    const movies = localStorage.getItem('utfpr-meu-cinema/user-movies');
-    if (movies) {
-      const storedMoviesArray = JSON.parse(movies);
-      console.log(storedMoviesArray);
-      storedMoviesArray.push({
-        ...this.movie,
-        id: storedMoviesArray.length + 1,
-      });
-      localStorage.setItem(
-        'utfpr-meu-cinema/user-movies',
-        JSON.stringify(storedMoviesArray)
-      );
-    } else {
-      localStorage.setItem(
-        'utfpr-meu-cinema/user-movies',
-        JSON.stringify([{ ...this.movie, id: 1 }])
-      );
+  //method based from: https://stackoverflow.com/questions/35940290/how-to-convert-base64-string-to-javascript-file-object-like-as-from-file-input-f
+  dataURLtoFile = (dataurl: string, filename: string): File => {
+    var arr = dataurl.split(',');
+    const mime = arr[0].match(/:(.*?);/)![1];
+    const bstr = atob(arr[1]);
+    let n = bstr.length;
+    const u8arr = new Uint8Array(n);
+
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
     }
-    this.router.navigate(['/inicio']);
+
+    return new File([u8arr], filename, { type: mime });
+  };
+
+  ngOnDestroy() {
+    if (this.coverIdTemp) {
+      this.coverService.delete(this.coverIdTemp);
+    }
+  }
+
+  submitForm() {
+    this.validSubmit.emit(this.movie);
   }
 }

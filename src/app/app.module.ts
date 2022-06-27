@@ -1,6 +1,7 @@
 import { NgModule } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BrowserModule } from '@angular/platform-browser';
+import { HttpClientModule } from '@angular/common/http';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
@@ -14,9 +15,6 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { ListTitleComponent } from './shared/list-title/list-title.component';
 import { MovieFormComponent } from './shared/movie-form/movie-form.component';
 import { NewMovieComponent } from './new-movie/new-movie.component';
-import { NgxIndexedDBModule } from 'ngx-indexed-db';
-
-import { indexedDBConfig } from './config/dbConfig';
 
 @NgModule({
   declarations: [
@@ -32,12 +30,7 @@ import { indexedDBConfig } from './config/dbConfig';
     MovieFormComponent,
     NewMovieComponent,
   ],
-  imports: [
-    BrowserModule,
-    AppRoutingModule,
-    FormsModule,
-    NgxIndexedDBModule.forRoot(indexedDBConfig),
-  ],
+  imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],
   bootstrap: [AppComponent],
 })
