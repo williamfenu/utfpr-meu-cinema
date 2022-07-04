@@ -22,7 +22,7 @@ export class MovieFormComponent implements OnInit {
   @Input() buttonLabel!: String;
   @Input() movie: Movie = {
     id: undefined,
-    cover: '/assets/default-placeholder.png',
+    cover: 'assets/default-placeholder.png',
     name: '',
     status: 'not_watched',
     comments: '',
