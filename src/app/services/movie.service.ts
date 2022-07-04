@@ -1,6 +1,6 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpParams } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-import { lastValueFrom } from 'rxjs';
+import { catchError, lastValueFrom, Observable, throwError } from 'rxjs';
 
 import { Movie } from '../models/types/movie';
 
@@ -18,7 +18,33 @@ export class MovieService {
     return lastValueFrom(this.client.post<Movie>(this.url, movie));
   }
 
-  async getAll(): Promise<Movie[]> {
-    return lastValueFrom(this.client.get<Movie[]>(this.url));
+  findById(movieId: number): Observable<Movie> {
+    return this.client
+      .get<Movie>(`${this.url}/${movieId}`)
+      .pipe(
+        catchError((error) =>
+          throwError(
+            () =>
+              new Error(
+                `Ocorreu erro ao tentar buscar o filme do servidor, tente novamente mais tarde`
+              )
+          )
+        )
+      );
+  }
+
+  getAll(): Observable<Movie[]> {
+    return this.client
+      .get<Movie[]>(this.url)
+      .pipe(
+        catchError((error) =>
+          throwError(
+            () =>
+              new Error(
+                `Ocorreu erro ao tentar buscar os filmes do servidor, tente novamente mais tarde`
+              )
+          )
+        )
+      );
   }
 }

@@ -1,2 +1,15 @@
-<app-movie-list title="Filmes que desejo assistir"></app-movie-list>
-<app-movie-list title="Filmes adicionados recentemente"></app-movie-list>
+<app-movie-list
+  [movies]="wishToWatchMovies"
+  title="Filmes que desejo assistir"
+></app-movie-list>
+<span class="nenhum-filme-adicionado" *ngIf="!wishToWatchMovies.length"
+  >Nenhum filme adicionado</span
+>
+
+<app-movie-list
+  [movies]="recentAddedMovies"
+  title="Filmes adicionados recentemente"
+></app-movie-list>
+<span class="nenhum-filme-adicionado" *ngIf="!recentAddedMovies.length"
+  >Nenhum filme adicionado</span
+>
