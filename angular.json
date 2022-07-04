@@ -3,7 +3,7 @@
   "version": 1,
   "newProjectRoot": "projects",
   "projects": {
-    "meu-cinema": {
+    "utfpr-meu-cinema": {
       "projectType": "application",
       "schematics": {
         "@schematics/angular:application": {
@@ -17,7 +17,7 @@
         "build": {
           "builder": "@angular-devkit/build-angular:browser",
           "options": {
-            "outputPath": "dist/meu-cinema",
+            "outputPath": "dist/utfpr-meu-cinema",
             "index": "src/index.html",
             "main": "src/main.ts",
             "polyfills": "src/polyfills.ts",
@@ -68,10 +68,10 @@
           "builder": "@angular-devkit/build-angular:dev-server",
           "configurations": {
             "production": {
-              "browserTarget": "meu-cinema:build:production"
+              "browserTarget": "utfpr-meu-cinema:build:production"
             },
             "development": {
-              "browserTarget": "meu-cinema:build:development"
+              "browserTarget": "utfpr-meu-cinema:build:development"
             }
           },
           "defaultConfiguration": "development"
@@ -79,7 +79,7 @@
         "extract-i18n": {
           "builder": "@angular-devkit/build-angular:extract-i18n",
           "options": {
-            "browserTarget": "meu-cinema:build"
+            "browserTarget": "utfpr-meu-cinema:build"
           }
         },
         "test": {
@@ -102,5 +102,5 @@
       }
     }
   },
-  "defaultProject": "meu-cinema"
+  "defaultProject": "utfpr-meu-cinema"
 }
