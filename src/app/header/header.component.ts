@@ -7,7 +7,7 @@ import { menu } from '../models/types/menu';
   styleUrls: ['./header.component.css'],
 })
 export class HeaderComponent implements OnInit {
-  logoPath = '/assets/logo.png';
+  logoPath = 'assets/logo.png';
   labelButton = 'Cadastrar novo Filme';
   menus: {
     main: menu;
