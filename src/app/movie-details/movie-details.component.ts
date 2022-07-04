@@ -2,7 +2,7 @@ import * as M from 'materialize-css';
 import { Component, OnInit, Input } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { Movie } from '../models/types/movie';
-import { movieSamples } from '../models/samples/movie-samples';
+import { MovieService } from '../services/movie.service';
 
 @Component({
   selector: 'app-movie-details',
@@ -10,18 +10,14 @@ import { movieSamples } from '../models/samples/movie-samples';
   styleUrls: ['./movie-details.component.css'],
 })
 export class MovieDetailsComponent implements OnInit {
-  @Input() movie!: Movie;
+  movie!: Movie;
 
-  constructor(private route: ActivatedRoute) {}
+  constructor(private route: ActivatedRoute, private service: MovieService) {}
 
   ngOnInit(): void {
-    const foundMovie = movieSamples.find(
-      (movie) => movie?.id?.toString() === this.route.snapshot.params['id']
-    );
-
-    if (foundMovie) {
-      this.movie = foundMovie;
-    }
+    this.service
+      .findById(Number(this.route.snapshot.params['id']))
+      .subscribe((movie) => (this.movie = movie));
   }
 
   ngAfterViewInit() {

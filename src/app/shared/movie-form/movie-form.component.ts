@@ -1,5 +1,12 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
-import { DomSanitizer, SafeUrl } from '@angular/platform-browser';
+import {
+  Component,
+  OnInit,
+  Input,
+  Output,
+  EventEmitter,
+  SecurityContext,
+} from '@angular/core';
+import { DomSanitizer } from '@angular/platform-browser';
 
 import { CoverService } from 'src/app/services/cover.service';
 
@@ -45,11 +52,11 @@ export class MovieFormComponent implements OnInit {
           .then((response) => {
             if (response) {
               this.coverIdTemp = response.id;
-              this.movie.cover = this.domSanitizer.bypassSecurityTrustUrl(
-                URL.createObjectURL(
-                  this.dataURLtoFile(response.data, response.filename)
-                )
+              const url = this.domSanitizer.sanitize(
+                SecurityContext.RESOURCE_URL,
+                this.domSanitizer.bypassSecurityTrustResourceUrl(response.data)
               );
+              this.movie.cover = url;
             }
           });
       };

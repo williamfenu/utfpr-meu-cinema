@@ -4,7 +4,7 @@
   <div *ngFor="let movie of movies" class="col s12 m2">
     <div class="card small">
       <div class="card-image waves-effect waves-block waves-light">
-        <img class="activator" src="{{ movie.cover }}" />
+        <img class="activator" [src]="movie.cover" />
       </div>
       <div class="card-content footer">
         <span

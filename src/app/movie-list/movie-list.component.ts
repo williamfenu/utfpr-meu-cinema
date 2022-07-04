@@ -1,6 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
 import { Movie } from '../models/types/movie';
-import { movieSamples } from '../models/samples/movie-samples';
 
 @Component({
   selector: 'app-movie-list',
@@ -9,7 +8,7 @@ import { movieSamples } from '../models/samples/movie-samples';
 })
 export class MovieListComponent implements OnInit {
   @Input() title = '';
-  @Input() movies: Movie[] = movieSamples;
+  @Input() movies: Movie[] = [];
   constructor() {}
 
   ngOnInit(): void {}
