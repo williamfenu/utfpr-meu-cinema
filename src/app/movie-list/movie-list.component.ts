@@ -9,7 +9,20 @@ import { Movie } from '../models/types/movie';
 export class MovieListComponent implements OnInit {
   @Input() title = '';
   @Input() movies: Movie[] = [];
+
+  movieBadgeByStatus = {
+    wish_watch: { label: 'Desejo assistir', color: '#FAB344' },
+    watched: { label: 'Assistido', color: '#009141' },
+  };
   constructor() {}
 
   ngOnInit(): void {}
+
+  getBadgeLabel(status: 'wish_watch' | 'watched') {
+    return this.movieBadgeByStatus[status].label;
+  }
+
+  getBadgeColor(status: 'wish_watch' | 'watched') {
+    return this.movieBadgeByStatus[status].color;
+  }
 }

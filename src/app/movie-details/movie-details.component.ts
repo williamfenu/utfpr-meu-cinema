@@ -1,6 +1,6 @@
 import * as M from 'materialize-css';
-import { Component, OnInit, Input } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, OnInit } from '@angular/core';
+import { ActivatedRoute, Router } from '@angular/router';
 import { Movie } from '../models/types/movie';
 import { MovieService } from '../services/movie.service';
 
@@ -12,7 +12,11 @@ import { MovieService } from '../services/movie.service';
 export class MovieDetailsComponent implements OnInit {
   movie!: Movie;
 
-  constructor(private route: ActivatedRoute, private service: MovieService) {}
+  constructor(
+    private route: ActivatedRoute,
+    private router: Router,
+    private service: MovieService
+  ) {}
 
   ngOnInit(): void {
     this.service
@@ -22,5 +26,19 @@ export class MovieDetailsComponent implements OnInit {
 
   ngAfterViewInit() {
     M.updateTextFields();
+  }
+
+  updateMovie(movie: Movie) {
+    this.service.update(movie).subscribe({
+      error: (error) => M.toast({ html: error }),
+      complete: () => this.router.navigate(['/inicio']),
+    });
+  }
+
+  handleRemove(movie: Movie) {
+    this.service.delete(movie).subscribe({
+      error: (error) => M.toast({ html: error }),
+      complete: () => this.router.navigate(['/inicio']),
+    });
   }
 }

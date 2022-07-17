@@ -33,7 +33,7 @@
           class="materialize-textarea"
           [(ngModel)]="movie.comments"
           value="{{ movie.comments }}"
-          [ngClass]="movie.comments ? 'active' : ''"
+          [class.active]="movie.comments"
         ></textarea>
         <label for="movie_comments">Comentários</label>
       </div>
@@ -53,54 +53,38 @@
         </div>
       </div>
     </div>
-    <div class="row">
-      <p>
-        <label>
-          <input
-            [(ngModel)]="movie.status"
-            class="with-gap"
-            value="not_watched"
-            name="status"
-            type="radio"
-            checked
-          />
-          <span>Não assistido</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input
-            [(ngModel)]="movie.status"
-            class="with-gap"
-            value="wish_watch"
-            name="status"
-            type="radio"
-          />
-          <span>Desejo Assistir</span>
-        </label>
-      </p>
-      <p>
-        <label>
-          <input
-            [(ngModel)]="movie.status"
-            class="with-gap"
-            value="watched"
-            name="status"
-            type="radio"
-          />
-          <span>Assistido</span>
-        </label>
-      </p>
-    </div>
     <app-button
       [disabled]="!form.valid"
       label="{{ buttonLabel }}"
+      class="margin-right"
+      type="submit"
       (action)="submitForm()"
     ></app-button>
+    <app-button
+      *ngIf="movie.id"
+      label="Remover"
+      (action)="handleRemove()"
+    ></app-button>
   </form>
-  <div class="col s6 m3">
+  <div class="col s6 m4">
     <div>
       <img class="cover" [src]="movie.cover" />
+    </div>
+    <div class="button-status-container">
+      <app-button
+        class="fluid"
+        [active]="wishToWatchActive"
+        color="#FAB344"
+        label="Desejo assistir"
+        (action)="toggleActiveStatus('wish_watch')"
+      ></app-button>
+      <app-button
+        [active]="!wishToWatchActive"
+        class="fluid"
+        color="#009141"
+        label="Já assisti"
+        (action)="toggleActiveStatus('watched')"
+      ></app-button>
     </div>
   </div>
 </div>

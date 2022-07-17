@@ -19,15 +19,18 @@ import { Movie } from '../../models/types/movie';
 })
 export class MovieFormComponent implements OnInit {
   @Output() validSubmit = new EventEmitter();
+  @Output() onRemoveMovie = new EventEmitter();
   @Input() buttonLabel!: String;
   @Input() movie: Movie = {
     id: undefined,
     cover: 'assets/default-placeholder.png',
     name: '',
-    status: 'not_watched',
+    status: 'wish_watch',
     comments: '',
   };
-  coverIdTemp: number | undefined;
+  wishToWatchActive = true;
+  watchedActive = false;
+  tempCoverId = 0;
 
   constructor(
     private domSanitizer: DomSanitizer,
@@ -35,6 +38,15 @@ export class MovieFormComponent implements OnInit {
   ) {}
 
   ngOnInit(): void {}
+
+  ngAfterContentChecked(): void {
+    if (this.movie && this.movie.id) {
+      if (this.movie.status === 'watched') {
+        this.wishToWatchActive = false;
+        this.watchedActive = true;
+      }
+    }
+  }
 
   onUpload(event: Event) {
     const files = (event.target as HTMLInputElement).files;
@@ -51,12 +63,12 @@ export class MovieFormComponent implements OnInit {
           })
           .then((response) => {
             if (response) {
-              this.coverIdTemp = response.id;
+              this.tempCoverId = response.id ?? 0;
               const url = this.domSanitizer.sanitize(
                 SecurityContext.RESOURCE_URL,
                 this.domSanitizer.bypassSecurityTrustResourceUrl(response.data)
               );
-              this.movie.cover = url;
+              this.movie.cover = url ?? '';
             }
           });
       };
@@ -79,12 +91,28 @@ export class MovieFormComponent implements OnInit {
   };
 
   ngOnDestroy() {
-    if (this.coverIdTemp) {
-      this.coverService.delete(this.coverIdTemp);
+    if (this.tempCoverId) {
+      this.coverService.delete(this.tempCoverId);
+    }
+  }
+
+  toggleActiveStatus(status: 'wish_watch' | 'watched') {
+    this.movie.status = status;
+
+    if (status === 'wish_watch') {
+      this.wishToWatchActive = true;
+      this.watchedActive = false;
+    } else {
+      this.wishToWatchActive = false;
+      this.watchedActive = true;
     }
   }
 
   submitForm() {
     this.validSubmit.emit(this.movie);
+  }
+
+  handleRemove() {
+    this.onRemoveMovie.emit(this.movie);
   }
 }

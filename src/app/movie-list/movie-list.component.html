@@ -21,8 +21,13 @@
         <p>{{ movie.comments }}</p>
       </div>
       <div class="card-action">
-        <a [routerLink]="['../filme', movie.id]">Editar</a>
-        <!-- <span class="new badge red" data-badge-caption="">Assistido</span> -->
+        <a class="edit-icon" [routerLink]="['../filme', movie.id]">
+          <i class="material-icons">edit</i>
+        </a>
+        <app-badge
+          color="{{ getBadgeColor(movie.status) }}"
+          label="{{ getBadgeLabel(movie.status) }}"
+        ></app-badge>
       </div>
     </div>
   </div>

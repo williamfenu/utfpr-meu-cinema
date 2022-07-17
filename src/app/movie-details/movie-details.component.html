@@ -1,1 +1,6 @@
-<app-movie-form buttonLabel="Atualizar" [movie]="movie"></app-movie-form>
+<app-movie-form
+  (validSubmit)="updateMovie($event)"
+  buttonLabel="Atualizar"
+  [movie]="movie"
+  (onRemoveMovie)="handleRemove($event)"
+></app-movie-form>

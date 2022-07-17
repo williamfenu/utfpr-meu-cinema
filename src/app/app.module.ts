@@ -15,6 +15,7 @@ import { MovieDetailsComponent } from './movie-details/movie-details.component';
 import { ListTitleComponent } from './shared/list-title/list-title.component';
 import { MovieFormComponent } from './shared/movie-form/movie-form.component';
 import { NewMovieComponent } from './new-movie/new-movie.component';
+import { BadgeComponent } from './badge/badge.component';
 
 @NgModule({
   declarations: [
@@ -29,6 +30,7 @@ import { NewMovieComponent } from './new-movie/new-movie.component';
     ListTitleComponent,
     MovieFormComponent,
     NewMovieComponent,
+    BadgeComponent,
   ],
   imports: [BrowserModule, AppRoutingModule, FormsModule, HttpClientModule],
   providers: [],

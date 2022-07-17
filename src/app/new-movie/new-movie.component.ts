@@ -14,6 +14,11 @@ export class NewMovieComponent implements OnInit {
   ngOnInit(): void {}
 
   onValidMovie(movie: Movie) {
-    this.movieService.save(movie).then(() => this.router.navigate(['/inicio']));
+    this.movieService
+      .save(movie)
+      .subscribe({
+        error: (error) => M.toast({ html: error }),
+        complete: () => this.router.navigate(['/inicio']),
+      });
   }
 }

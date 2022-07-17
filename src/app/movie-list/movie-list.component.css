@@ -1,5 +1,6 @@
 .small{
   height: 25em;
+  width: calc(100% + 10px);
 }
 .footer {
   overflow: hidden;
@@ -11,4 +12,13 @@
 .card-title{
   font-size: 1em;
 }
+.card-image{
+  height: inherit;
+}
+.activator{
+  height: inherit;
+}
 
+.card .card-action a:not(.btn):not(.btn-large):not(.btn-small):not(.btn-large):not(.btn-floating) {
+  margin-right: 0px;
+}
