@@ -1,6 +1,6 @@
 <h1>Meu cinema</h1>
 
-Link do protótipo: https://www.figma.com/file/MIx1tFTl0rvgkKH4nmTg5W/Meu-cinema?node-id=0%3A1
+Link do protótipo: https://www.figma.com/file/MIx1tFTl0rvgkKH4nmTg5W/Meu-cinema?node-id=0%3A1 \
 Link github pages: https://williamfenu.github.io/utfpr-meu-cinema/inicio
 
 <h3>Checklist</h3>
