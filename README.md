@@ -3,6 +3,8 @@
 Link do protótipo: https://www.figma.com/file/MIx1tFTl0rvgkKH4nmTg5W/Meu-cinema?node-id=0%3A1 \
 Link github pages: https://williamfenu.github.io/utfpr-meu-cinema/inicio
 
+É necessário ter o json server rodando na máquina.
+
 <h3>Checklist</h3>
 
 - [x] Criar o repositório no GitHub com a estrutura do Gitflow, ou seja, branches main e develop.
